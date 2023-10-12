@@ -13,9 +13,9 @@
     align-items: center;
 }
 
-#board {
+#board{
     background: linear-gradient(rgb(170, 236, 170), rgb(236, 236, 167));
-    width: 90vmin;
+    width: 78vmin;
     height: 92vmin;
     border: 2px solid black;
     display: grid;
