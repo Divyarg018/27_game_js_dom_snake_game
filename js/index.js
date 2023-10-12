@@ -1,5 +1,5 @@
 // Game Constants & Variables
-let inputDir = {x: 0, y: 0}; 
+let inputDir = { x: 0, y: 0 };
 const foodSound = new Audio('music/food.mp3');
 const gameOverSound = new Audio('music/gameover.mp3');
 const moveSound = new Audio('music/move.mp3');
@@ -8,10 +8,10 @@ let speed = 19;
 let score = 0;
 let lastPaintTime = 0;
 let snakeArr = [
-    {x: 13, y: 15}
+    { x: 13, y: 15 }
 ];
 
-food = {x: 6, y: 7};
+food = { x: 6, y: 7 };
 
 //Game Functions
 function main(ctime) {
@@ -25,22 +25,40 @@ function main(ctime) {
     gameEngine();
 }
 function gameEngine() {
+    // Part 1: Updating the snake array & Food
+    if (isCollide(snakeArr)) {
+        gameOverSound.play();
+        musicSound.pause();
+        inputDir = { x: 0, y: 0 };
+        alert("Game Over. Press any key to play again!");
+        snakeArr = [{ x: 13, y: 15 }];
+        musicSound.play();
+        score = 0;
+    }
+      // If you have eaten the food, increment the score and regenerate the food
+      if(snakeArr[0].y === food.y && snakeArr[0].x ===food.x){
+        snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
+        let a = 2;
+        let b = 16;
+        food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
+    }
+
 
     board.innerHTML = "";
-    snakeArr.forEach((e, index)=>{
+    snakeArr.forEach((e, index) => {
         snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = e.y;
         snakeElement.style.gridColumnStart = e.x;
 
-        if(index === 0){
+        if (index === 0) {
             snakeElement.classList.add('head');
         }
-        else{
+        else {
             snakeElement.classList.add('snake');
         }
         board.appendChild(snakeElement);
     });
-    
+
     foodElement = document.createElement('div');
     foodElement.style.gridRowStart = food.y;
     foodElement.style.gridColumnStart = food.x;
@@ -49,9 +67,9 @@ function gameEngine() {
 
 
 }
-window,requestAnimationFrame(main);
-window.addEventListener('keydown', e =>{
-    inputDir = {x: 0, y: 1}
+window, requestAnimationFrame(main);
+window.addEventListener('keydown', e => {
+    inputDir = { x: 0, y: 1 }
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":
