@@ -50,11 +50,19 @@ function gameEngine() {
         score = 0;
     }
     // If you have eaten the food, increment the score and regenerate the food
-    if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
-        snakeArr.unshift({ x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y });
+    if(snakeArr[0].y === food.y && snakeArr[0].x ===food.x){
+        foodSound.play();
+        score += 1;
+        if(score>hiscoreval){
+            hiscoreval = score;
+            localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
+            hiscoreBox.innerHTML = "HiScore: " + hiscoreval;
+        }
+        scoreBox.innerHTML = "Score: " + score;
+        snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
         let a = 2;
         let b = 16;
-        food = { x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random()) }
+        food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
     }
 
     // Moving the snake
