@@ -46,7 +46,7 @@ function gameEngine() {
         inputDir = { x: 0, y: 0 };
         alert("Game Over. Press any key to play again!");
         snakeArr = [{ x: 13, y: 15 }];
-        musicSound.play();
+        // musicSound.play();
         score = 0;
     }
       // If you have eaten the food, increment the score and regenerate the food
@@ -88,6 +88,17 @@ function gameEngine() {
     board.appendChild(foodElement);
 
 
+}
+
+musicSound.play();
+let hiscore = localStorage.getItem("hiscore");
+if(hiscore === null){
+    hiscoreval = 0;
+    localStorage.setItem("hiscore", JSON.stringify(hiscoreval))
+}
+else{
+    hiscoreval = JSON.parse(hiscore);
+    hiscoreBox.innerHTML = "HiScore: " + hiscore;
 }
 window, requestAnimationFrame(main);
 window.addEventListener('keydown', e => {
