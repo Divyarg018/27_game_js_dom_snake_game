@@ -27,15 +27,15 @@ function main(ctime) {
 function isCollide(snake) {
     // If you bump into yourself 
     for (let i = 1; i < snakeArr.length; i++) {
-        if(snake[i].x === snake[0].x && snake[i].y === snake[0].y){
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
             return true;
         }
     }
     // If you bump into the wall
-    if(snake[0].x >= 18 || snake[0].x <=0 || snake[0].y >= 18 || snake[0].y <=0){
+    if (snake[0].x >= 18 || snake[0].x <= 0 || snake[0].y >= 18 || snake[0].y <= 0) {
         return true;
     }
-        
+
     return false;
 }
 function gameEngine() {
@@ -49,17 +49,17 @@ function gameEngine() {
         // musicSound.play();
         score = 0;
     }
-      // If you have eaten the food, increment the score and regenerate the food
-      if(snakeArr[0].y === food.y && snakeArr[0].x ===food.x){
-        snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
+    // If you have eaten the food, increment the score and regenerate the food
+    if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
+        snakeArr.unshift({ x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y });
         let a = 2;
         let b = 16;
-        food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
+        food = { x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random()) }
     }
-    
+
     // Moving the snake
-    for (let i = snakeArr.length - 2; i>=0; i--) { 
-        snakeArr[i+1] = {...snakeArr[i]};
+    for (let i = snakeArr.length - 2; i >= 0; i--) {
+        snakeArr[i + 1] = { ...snakeArr[i] };
     }
 
     snakeArr[0].x += inputDir.x;
@@ -92,11 +92,11 @@ function gameEngine() {
 
 musicSound.play();
 let hiscore = localStorage.getItem("hiscore");
-if(hiscore === null){
+if (hiscore === null) {
     hiscoreval = 0;
     localStorage.setItem("hiscore", JSON.stringify(hiscoreval))
 }
-else{
+else {
     hiscoreval = JSON.parse(hiscore);
     hiscoreBox.innerHTML = "HiScore: " + hiscore;
 }
