@@ -24,6 +24,10 @@ function main(ctime) {
     lastPaintTime = ctime;
     gameEngine();
 }
+
+function isCollide(sarr){
+    return false;
+}
 function gameEngine() {
     // Part 1: Updating the snake array & Food
     if (isCollide(snakeArr)) {
@@ -42,6 +46,14 @@ function gameEngine() {
         let b = 16;
         food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
     }
+    
+    // Moving the snake
+    for (let i = snakeArr.length - 2; i>=0; i--) { 
+        snakeArr[i+1] = {...snakeArr[i]};
+    }
+
+    snakeArr[0].x += inputDir.x;
+    snakeArr[0].y += inputDir.y;
 
 
     board.innerHTML = "";
